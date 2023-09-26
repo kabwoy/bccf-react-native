@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ErrorMessage, Formik, setNestedObjectValues } from "formik";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import { Image, StyleSheet, Text, View } from "react-native";
 import * as Yup from 'yup'
+import * as ImagePicker from 'expo-image-picker'
 import ErrorText from "../components/ErrorText";
 
 const loginSchema = Yup.object().shape({
@@ -13,6 +14,18 @@ const loginSchema = Yup.object().shape({
 })
 
 function Login() {
+  const requirePermission = async() => {
+    try{
+      await ImagePicker.requestMediaLibraryPermissionsAsync()
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+   
+  useEffect(()=>{
+    requirePermission()
+  },[])
   return (
     <Formik validationSchema={loginSchema} initialValues={{ email: "", password: "" }} onSubmit={(values)=>console.log(values)}>
       {({handleSubmit , errors , handleChange , setFieldTouched , touched}) => (
@@ -39,7 +52,8 @@ function Login() {
               label={"password"}
             />
              <ErrorText visible={touched.password} error={errors.password} />
-            <AppButton onPress={handleSubmit}  />
+            <AppButton title={'Login'} onPress={handleSubmit}  />
+            {/* <AppButton title={'pick'} onPress={async ()=> await ImagePicker.launchImageLibraryAsync({mediaTypes:ImagePicker.MediaTypeOptions.Images})}  /> */}
           </Screen>
           </View>
         </>
@@ -71,4 +85,4 @@ const styles = StyleSheet.create({
       color:"orange"
     }
 })
-export default Login;
+export default Login

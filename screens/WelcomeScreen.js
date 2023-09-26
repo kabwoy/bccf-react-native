@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImageBackground , StyleSheet, TouchableHighlight, View , Text , Image } from 'react-native'
 import {} from '@expo/vector-icons'
-function WelcomeScreen() {
+function WelcomeScreen({navigation}) {
   return (
    <ImageBackground style={styles.imageContainer} resizeMode='cover' width={100}  source={require("../assets/cross.jpg")}>
       <Text style={styles.title}>Welcome To <Text style={styles.titleSubString} >Bccf</Text></Text>
@@ -11,7 +11,7 @@ function WelcomeScreen() {
         <Text style={styles.loginText}>Register</Text>
     </View>
     </TouchableHighlight>
-    <TouchableHighlight style={styles.login} underlayColor={'#00B4AB'} onPress={()=>alert("hello")} >
+    <TouchableHighlight style={styles.login} underlayColor={'#00B4AB'} onPress={()=>navigation.navigate('login')} >
     <View>
         <Text style={styles.loginText}>Login</Text>
     </View>

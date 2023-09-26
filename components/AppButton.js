@@ -1,11 +1,11 @@
 import React from 'react'
 import { View , StyleSheet, Text, TouchableHighlight } from 'react-native'
 
-function AppButton({onPress}) {
+function AppButton({onPress , title}) {
   return (
     <TouchableHighlight underlayColor={'green'}  style={styles.button} onPress={onPress}>
    <View  >
-      <Text style={styles.buttonText}>Login</Text>
+      <Text style={styles.buttonText}>{title}</Text>
    </View>
    </TouchableHighlight>
   )
